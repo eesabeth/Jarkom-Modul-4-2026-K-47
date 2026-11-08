@@ -564,6 +564,8 @@ ip route add 0.0.0.0/0 via 10.87.16.89
 # ping 10.87.16.2
 # ping 8.8.8.8
 ```
+## hasil test ping
+
 
 ## **CIDR - Cisco Packet Tracker (Elisabeth)**
 
