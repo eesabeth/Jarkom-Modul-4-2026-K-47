@@ -12,371 +12,10 @@
 
 ## Tree Pembagian IP
 
-
 ## Tabel Pembagian IP Address
 <img width="634" height="496" alt="image" src="https://github.com/user-attachments/assets/0cb02e55-72bf-4fdb-824c-cb2a1ecd5206" />
 
 ## Konfigurasi IP Address (IP Route)
-### Router
-
-
-
-## **CIDR - Cisco Packet Tracker (Elisabeth)**
-
-### Topologi Jaringan
-### Cisco Packet Tracer
-![Topologi CPT](aset/cpt/TOPOLOGICIDR.png)
-
-- **Prefix Kelompok:** `10.87.x.x`
-- **Router Utama (Core):** Wired — sebagai persimpangan utama yang menghubungkan seluruh cabang
-- **Cabang Kiri:** Psyche → Copland / Schumann → Accela
-- **Cabang Kanan:** Navi (dengan subnet klien yang besar)
-- **Cabang Bawah:** Tachibana → Deus → Protocol7 → Knights → Phantoma → Shibuya
-
-## Pembagian Subnet (Subnetting) CIDR
-Subnetting dengan metode CIDR dilakukan **bottom-up** — mulai dari subnet terkecil di ujung topologi, kemudian digabungkan ke atas hingga mendapatkan satu blok besar (supernet).
-### Proses Penggabungan (Supernet)
-Berikut adalah tahapan penggabungan subnet secara bertahap:
-#### Tahap 1 — Penggabungan Awal
-![CIDR Tahap 1](aset/cpt/CIDR%20K47%20(1).png)
-
-#### Tahap 2 — Penggabungan Lanjutan
-![CIDR Tahap 2](aset/cpt/CIDR%20K47%20(2).png)
-
-#### Tahap 3
-![CIDR Tahap 3](aset/cpt/CIDR%20K47%20(3).png)
-
-#### Tahap 4
-![CIDR Tahap 4](aset/cpt/CIDR%20K47%20(4).png)
-
-#### Tahap 5 — Supernet Final
-![CIDR Tahap 5](aset/cpt/CIDR%20K47%20(5).png)
-
-#### Tabel Supernet
-![Topologi CPT](aset/cpt/supernet1.png)  
-![Topologi CPT](aset/cpt/supernet2.png)  
-![Topologi CPT](aset/cpt/supernet3.png)
-
-
-## Tree Pembagian IP
-![Tree CIDR K-47](aset/cpt/TREE%20CIDR.png)
-Tree di atas menunjukkan hierarki pembagian IP address dari supernet terbesar hingga subnet terkecil. Setiap cabang merepresentasikan satu langkah pemecahan (splitting) subnet menjadi dua bagian yang lebih kecil.
-
-## Tabel Pembagian IP Address
-Berikut adalah hasil akhir pembagian IP address untuk seluruh subnet dalam topologi:
-![Topologi CPT](aset/cpt/subnetting.png)
-
-### Subnet Klien (Host Networks)
-![Topologi CPT](aset/cpt/iproute.png)
-
-## Konfigurasi IP Address (IP Route)
-### Cisco Packet Tracer (CPT)
-Konfigurasi dilakukan menggunakan **Cisco IOS CLI** pada masing-masing router. Routing menggunakan **OSPF (Open Shortest Path First)** dengan area 0.
-> **Format Konfigurasi:**
-> ```
-> enable
-> configure terminal
-> interface <interface>
-> ip address <IP> <netmask>
-> no shutdown
-> exit
-> router ospf 1
-> network 10.87.0.0 0.0.255.255 area 0
-> end
-> wr
-> ```
-#### Router Cyberia (Cabang Atas-Kiri)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.57 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.14.1 255.255.255.128
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Wired (Core / Persimpangan Utama)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.58 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.16.61 255.255.255.252
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.16.65 255.255.255.252
- no shutdown
-interface FastEthernet1/1
- no ip address
- ip address 10.87.16.33 255.255.255.248
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Navi (Cabang Kanan)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.66 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.12.1 255.255.255.0
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.13.1 255.255.255.0
- no shutdown
-interface FastEthernet1/1
- no ip address
- ip address 10.87.15.65 255.255.255.192
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Psyche (Cabang Kiri)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.0.1 255.255.252.0
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.16.34 255.255.255.248
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Copland (Cabang Kiri)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.35 255.255.255.248
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.8.1 255.255.254.0
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.15.193 255.255.255.192
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Schumann (Cabang Kiri-Tengah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.36 255.255.255.248
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.16.41 255.255.255.248
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.16.69 255.255.255.252
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Accela (Ujung Kiri)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.70 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.4.1 255.255.252.0
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Tachibana (Cabang Bawah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.62 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.10.1 255.255.254.0
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.16.73 255.255.255.252
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Deus (Cabang Bawah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.74 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.14.129 255.255.255.128
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.16.77 255.255.255.252
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Protocol7 (Cabang Bawah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.78 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.16.81 255.255.255.252
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.15.129 255.255.255.192
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Knights (Cabang Bawah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.82 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.16.49 255.255.255.248
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.16.85 255.255.255.252
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Phantoma (Cabang Bawah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.86 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.16.89 255.255.255.252
- no shutdown
-interface FastEthernet1/0
- no ip address
- ip address 10.87.16.1 255.255.255.224
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
-#### Router Shibuya (Ujung Bawah)
-```bash
-enable
-configure terminal
-interface FastEthernet0/0
- no ip address
- ip address 10.87.16.90 255.255.255.252
- no shutdown
-interface FastEthernet0/1
- no ip address
- ip address 10.87.15.1 255.255.255.192
- no shutdown
-exit
-router ospf 1
- no network 10.47.0.0 0.0.255.255 area 0
- network 10.87.0.0 0.0.255.255 area 0
-end
-wr
-```
----
 ### GNS3
 #### Konfigurasi Interface Router
 #### Config Cyberia
@@ -797,6 +436,362 @@ iface eth0 inet static
     address 10.87.13.2
     netmask 255.255.255.0
     gateway 10.87.13.1
+```
+
+## **CIDR - Cisco Packet Tracker (Elisabeth)**
+
+### Topologi Jaringan
+### Cisco Packet Tracer
+![Topologi CPT](aset/cpt/TOPOLOGICIDR.png)
+
+- **Prefix Kelompok:** `10.87.x.x`
+- **Router Utama (Core):** Wired — sebagai persimpangan utama yang menghubungkan seluruh cabang
+- **Cabang Kiri:** Psyche → Copland / Schumann → Accela
+- **Cabang Kanan:** Navi (dengan subnet klien yang besar)
+- **Cabang Bawah:** Tachibana → Deus → Protocol7 → Knights → Phantoma → Shibuya
+
+## Pembagian Subnet (Subnetting) CIDR
+Subnetting dengan metode CIDR dilakukan **bottom-up** — mulai dari subnet terkecil di ujung topologi, kemudian digabungkan ke atas hingga mendapatkan satu blok besar (supernet).
+### Proses Penggabungan (Supernet)
+Berikut adalah tahapan penggabungan subnet secara bertahap:
+#### Tahap 1 — Penggabungan Awal
+![CIDR Tahap 1](aset/cpt/CIDR%20K47%20(1).png)
+
+#### Tahap 2 — Penggabungan Lanjutan
+![CIDR Tahap 2](aset/cpt/CIDR%20K47%20(2).png)
+
+#### Tahap 3
+![CIDR Tahap 3](aset/cpt/CIDR%20K47%20(3).png)
+
+#### Tahap 4
+![CIDR Tahap 4](aset/cpt/CIDR%20K47%20(4).png)
+
+#### Tahap 5 — Supernet Final
+![CIDR Tahap 5](aset/cpt/CIDR%20K47%20(5).png)
+
+#### Tabel Supernet
+![Topologi CPT](aset/cpt/supernet1.png)  
+![Topologi CPT](aset/cpt/supernet2.png)  
+![Topologi CPT](aset/cpt/supernet3.png)
+
+
+## Tree Pembagian IP
+![Tree CIDR K-47](aset/cpt/TREE%20CIDR.png)
+Tree di atas menunjukkan hierarki pembagian IP address dari supernet terbesar hingga subnet terkecil. Setiap cabang merepresentasikan satu langkah pemecahan (splitting) subnet menjadi dua bagian yang lebih kecil.
+
+## Tabel Pembagian IP Address
+Berikut adalah hasil akhir pembagian IP address untuk seluruh subnet dalam topologi:
+![Topologi CPT](aset/cpt/subnetting.png)
+
+### Subnet Klien (Host Networks)
+![Topologi CPT](aset/cpt/iproute.png)
+
+## Konfigurasi IP Address (IP Route)
+### Cisco Packet Tracer (CPT)
+Konfigurasi dilakukan menggunakan **Cisco IOS CLI** pada masing-masing router. Routing menggunakan **OSPF (Open Shortest Path First)** dengan area 0.
+> **Format Konfigurasi:**
+> ```
+> enable
+> configure terminal
+> interface <interface>
+> ip address <IP> <netmask>
+> no shutdown
+> exit
+> router ospf 1
+> network 10.87.0.0 0.0.255.255 area 0
+> end
+> wr
+> ```
+#### Router Cyberia (Cabang Atas-Kiri)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.57 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.14.1 255.255.255.128
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Wired (Core / Persimpangan Utama)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.58 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.16.61 255.255.255.252
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.16.65 255.255.255.252
+ no shutdown
+interface FastEthernet1/1
+ no ip address
+ ip address 10.87.16.33 255.255.255.248
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Navi (Cabang Kanan)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.66 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.12.1 255.255.255.0
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.13.1 255.255.255.0
+ no shutdown
+interface FastEthernet1/1
+ no ip address
+ ip address 10.87.15.65 255.255.255.192
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Psyche (Cabang Kiri)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.0.1 255.255.252.0
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.16.34 255.255.255.248
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Copland (Cabang Kiri)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.35 255.255.255.248
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.8.1 255.255.254.0
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.15.193 255.255.255.192
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Schumann (Cabang Kiri-Tengah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.36 255.255.255.248
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.16.41 255.255.255.248
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.16.69 255.255.255.252
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Accela (Ujung Kiri)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.70 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.4.1 255.255.252.0
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Tachibana (Cabang Bawah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.62 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.10.1 255.255.254.0
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.16.73 255.255.255.252
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Deus (Cabang Bawah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.74 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.14.129 255.255.255.128
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.16.77 255.255.255.252
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Protocol7 (Cabang Bawah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.78 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.16.81 255.255.255.252
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.15.129 255.255.255.192
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Knights (Cabang Bawah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.82 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.16.49 255.255.255.248
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.16.85 255.255.255.252
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Phantoma (Cabang Bawah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.86 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.16.89 255.255.255.252
+ no shutdown
+interface FastEthernet1/0
+ no ip address
+ ip address 10.87.16.1 255.255.255.224
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
+```
+#### Router Shibuya (Ujung Bawah)
+```bash
+enable
+configure terminal
+interface FastEthernet0/0
+ no ip address
+ ip address 10.87.16.90 255.255.255.252
+ no shutdown
+interface FastEthernet0/1
+ no ip address
+ ip address 10.87.15.1 255.255.255.192
+ no shutdown
+exit
+router ospf 1
+ no network 10.47.0.0 0.0.255.255 area 0
+ network 10.87.0.0 0.0.255.255 area 0
+end
+wr
 ```
 ---
 ## Hasil Tes Ping
