@@ -4,11 +4,12 @@
 | 1 | Elisabeth La Satta Sitorus | 5027251039 |
 | 2 | Farrel Muhammad Athasyah Enrizy | 5027251100 |
 
-**VLSM**
+## **VLSM**
 
-**CIDR - Cisco Packet Tracker (Elisabeth)**
 
-## Topologi Jaringan
+## **CIDR - Cisco Packet Tracker (Elisabeth)**
+
+### Topologi Jaringan
 ### Cisco Packet Tracer
 ![Topologi CPT](aset/cpt/TOPOLOGICIDR.png)
 
@@ -29,7 +30,7 @@ Berikut adalah tahapan penggabungan subnet secara bertahap:
 ![CIDR Tahap 2](aset/cpt/CIDR%20K47%20(2).png)
 
 #### Tahap 3
-![CIDR Tahap 3](aset/cpt/CIDR%20K47%20(3).png
+![CIDR Tahap 3](aset/cpt/CIDR%20K47%20(3).png)
 
 #### Tahap 4
 ![CIDR Tahap 4](aset/cpt/CIDR%20K47%20(4).png)
