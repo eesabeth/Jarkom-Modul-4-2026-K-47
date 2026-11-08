@@ -25,21 +25,22 @@ Berikut adalah tahapan penggabungan subnet secara bertahap:
 #### Tahap 1 — Penggabungan Awal
 ![CIDR Tahap 1](aset/cpt/CIDR%20K47%20(1).png)
 
-
 #### Tahap 2 — Penggabungan Lanjutan
 ![CIDR Tahap 2](aset/cpt/CIDR%20K47%20(2).png)
-
 
 #### Tahap 3
 ![CIDR Tahap 3](aset/cpt/CIDR%20K47%20(3).png
 
-
 #### Tahap 4
 ![CIDR Tahap 4](aset/cpt/CIDR%20K47%20(4).png)
 
-
 #### Tahap 5 — Supernet Final
 ![CIDR Tahap 5](aset/cpt/CIDR%20K47%20(5).png)
+
+#### Tabel Supernet
+![Topologi CPT](aset/cpt/supernet1.png)  
+![Topologi CPT](aset/cpt/supernet2.png)  
+![Topologi CPT](aset/cpt/supernet3.png)
 
 
 ## Tree Pembagian IP
@@ -48,9 +49,10 @@ Tree di atas menunjukkan hierarki pembagian IP address dari supernet terbesar hi
 
 ## Tabel Pembagian IP Address
 Berikut adalah hasil akhir pembagian IP address untuk seluruh subnet dalam topologi:
+![Topologi CPT](aset/cpt/subnetting.png)
 
 ### Subnet Klien (Host Networks)
-
+![Topologi CPT](aset/cpt/iproute.png)
 
 ## Konfigurasi IP Address (IP Route)
 ### Cisco Packet Tracer (CPT)
