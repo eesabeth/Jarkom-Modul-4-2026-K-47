@@ -8,7 +8,186 @@
 
 ### Topologi Jaringan
 ### GNS3
+<img width="1972" height="1533" alt="Topologi" src="https://github.com/user-attachments/assets/496436f9-9f33-4724-afda-c38f9a41b856" />
 
+## Tree Pembagian IP
+
+
+## Tabel Pembagian IP Address
+<img width="634" height="496" alt="image" src="https://github.com/user-attachments/assets/0cb02e55-72bf-4fdb-824c-cb2a1ecd5206" />
+
+## Konfigurasi IP Address (IP Route)
+### Router
+
+#### Config Cyberia
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet dhcp
+auto eth1
+iface eth1 inet static
+    address 10.87.14.1
+    netmask 255.255.255.128
+auto eth2
+iface eth2 inet static
+    address 10.87.16.57
+    netmask 255.255.255.252
+```
+#### config Wired
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.58
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.16.49
+    netmask 255.255.255.248
+auto eth2
+iface eth2 inet static
+    address 10.87.16.61
+    netmask 255.255.255.252
+auto eth3
+iface eth3 inet static
+    address 10.87.16.65
+    netmask 255.255.255.252
+```
+#### config Psyche
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.50
+    netmask 255.255.255.248
+auto eth1
+iface eth1 inet static
+    address 10.87.0.1
+    netmask 255.255.252.0
+```
+#### config Copland
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.129
+    netmask 255.255.255.192
+auto eth1
+iface eth1 inet static
+    address 10.87.16.51
+    netmask 255.255.255.248
+auto eth2
+iface eth2 inet static
+    address 10.87.8.1
+    netmask 255.255.254.0
+```
+
+#### config Phantoma
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet dhcp
+auto eth1
+iface eth1 inet static
+    address 10.87.14.1
+    netmask 255.255.255.128
+auto eth2
+iface eth2 inet static
+    address 10.87.16.57
+    netmask 255.255.255.252
+```
+#### config Navi
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.66
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.12.1
+    netmask 255.255.255.0
+auto eth2
+iface eth2 inet static
+    address 10.87.15.65
+    netmask 255.255.255.192
+auto eth3
+iface eth3 inet static
+    address 10.87.13.1
+    netmask 255.255.255.0
+```
+#### config Knight
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.82
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.16.85
+    netmask 255.255.255.252
+auto eth2
+iface eth2 inet static
+    address 10.87.16.41
+    netmask 255.255.255.248
+```
+#### config Protocol7
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.78
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.16.81
+    netmask 255.255.255.252
+auto eth2
+iface eth2 inet static
+    address 10.87.15.193
+    netmask 255.255.255.192
+```
+
+#### config Shibuya
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.90
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.15.1
+    netmask 255.255.255.192
+```
+#### config Tachibana
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.62
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.10.1
+    netmask 255.255.254.0
+auto eth2
+iface eth2 inet static
+    address 10.87.16.73
+    netmask 255.255.255.252
+```
+####
 
 ## **CIDR - Cisco Packet Tracker (Elisabeth)**
 
