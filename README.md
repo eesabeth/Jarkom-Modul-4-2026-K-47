@@ -565,6 +565,7 @@ ip route add 0.0.0.0/0 via 10.87.16.89
 # ping 8.8.8.8
 ```
 ## hasil test ping
+<img width="730" height="553" alt="Hasil Terkoneksi node" src="https://github.com/user-attachments/assets/85eb4057-55c1-4dc2-bc0a-e8555eb6e455" />
 
 
 ## **CIDR - Cisco Packet Tracker (Elisabeth)**
