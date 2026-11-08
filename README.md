@@ -11,6 +11,8 @@
 <img width="1972" height="1533" alt="Topologi" src="https://github.com/user-attachments/assets/496436f9-9f33-4724-afda-c38f9a41b856" />
 
 ## Tree Pembagian IP
+<img width="2400" height="1792" alt="Gemini_Generated_Image_wyq5y0wyq5y0wyq5" src="https://github.com/user-attachments/assets/3d3982e7-2f63-4a1d-a2d1-443696a124d9" />
+
 
 ## Tabel Pembagian IP Address
 <img width="634" height="496" alt="image" src="https://github.com/user-attachments/assets/0cb02e55-72bf-4fdb-824c-cb2a1ecd5206" />
