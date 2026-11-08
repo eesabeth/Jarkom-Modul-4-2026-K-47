@@ -4,7 +4,7 @@
 | 1 | Elisabeth La Satta Sitorus | 5027251039 |
 | 2 | Farrel Muhammad Athasyah Enrizy | 5027251100 |
 
-## **VLSM**
+## **VLSM (Farrel)** 
 
 ### Topologi Jaringan
 ### GNS3
@@ -19,175 +19,7 @@
 ## Konfigurasi IP Address (IP Route)
 ### Router
 
-#### Config Cyberia
-```
-#!/bin/bash
 
-auto eth0
-iface eth0 inet dhcp
-auto eth1
-iface eth1 inet static
-    address 10.87.14.1
-    netmask 255.255.255.128
-auto eth2
-iface eth2 inet static
-    address 10.87.16.57
-    netmask 255.255.255.252
-```
-#### config Wired
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.58
-    netmask 255.255.255.252
-auto eth1
-iface eth1 inet static
-    address 10.87.16.49
-    netmask 255.255.255.248
-auto eth2
-iface eth2 inet static
-    address 10.87.16.61
-    netmask 255.255.255.252
-auto eth3
-iface eth3 inet static
-    address 10.87.16.65
-    netmask 255.255.255.252
-```
-#### config Psyche
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.50
-    netmask 255.255.255.248
-auto eth1
-iface eth1 inet static
-    address 10.87.0.1
-    netmask 255.255.252.0
-```
-#### config Copland
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.15.129
-    netmask 255.255.255.192
-auto eth1
-iface eth1 inet static
-    address 10.87.16.51
-    netmask 255.255.255.248
-auto eth2
-iface eth2 inet static
-    address 10.87.8.1
-    netmask 255.255.254.0
-```
-
-#### config Phantoma
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet dhcp
-auto eth1
-iface eth1 inet static
-    address 10.87.14.1
-    netmask 255.255.255.128
-auto eth2
-iface eth2 inet static
-    address 10.87.16.57
-    netmask 255.255.255.252
-```
-#### config Navi
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.66
-    netmask 255.255.255.252
-auto eth1
-iface eth1 inet static
-    address 10.87.12.1
-    netmask 255.255.255.0
-auto eth2
-iface eth2 inet static
-    address 10.87.15.65
-    netmask 255.255.255.192
-auto eth3
-iface eth3 inet static
-    address 10.87.13.1
-    netmask 255.255.255.0
-```
-#### config Knight
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.82
-    netmask 255.255.255.252
-auto eth1
-iface eth1 inet static
-    address 10.87.16.85
-    netmask 255.255.255.252
-auto eth2
-iface eth2 inet static
-    address 10.87.16.41
-    netmask 255.255.255.248
-```
-#### config Protocol7
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.78
-    netmask 255.255.255.252
-auto eth1
-iface eth1 inet static
-    address 10.87.16.81
-    netmask 255.255.255.252
-auto eth2
-iface eth2 inet static
-    address 10.87.15.193
-    netmask 255.255.255.192
-```
-
-#### config Shibuya
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.90
-    netmask 255.255.255.252
-auto eth1
-iface eth1 inet static
-    address 10.87.15.1
-    netmask 255.255.255.192
-```
-#### config Tachibana
-```
-#!/bin/bash
-
-auto eth0
-iface eth0 inet static
-    address 10.87.16.62
-    netmask 255.255.255.252
-auto eth1
-iface eth1 inet static
-    address 10.87.10.1
-    netmask 255.255.254.0
-auto eth2
-iface eth2 inet static
-    address 10.87.16.73
-    netmask 255.255.255.252
-```
-####
 
 ## **CIDR - Cisco Packet Tracker (Elisabeth)**
 
@@ -546,212 +378,425 @@ wr
 ```
 ---
 ### GNS3
-Pada GNS3, konfigurasi dibagi menjadi dua bagian:
-1. **Konfigurasi Interface** (`/etc/network/interfaces`) — untuk setiap node
-2. **Konfigurasi Routing** (`ip route`) — dijalankan sebagai script bash
 #### Konfigurasi Interface Router
-> Format: file `interfaces` di `/etc/network/interfaces`
-**Router Cyberia** (Gateway ke Internet via NAT/DHCP)
-```bash
+#### Config Cyberia
+```
+#!/bin/bash
+
 auto eth0
-iface eth0 inet dhcp         # Ke NAT / Internet
+iface eth0 inet dhcp
 auto eth1
 iface eth1 inet static
     address 10.87.14.1
-    netmask 255.255.255.128  # Subnet Lain dkk
+    netmask 255.255.255.128
 auto eth2
 iface eth2 inet static
     address 10.87.16.57
-    netmask 255.255.255.252  # Link ke Wired
+    netmask 255.255.255.252
 ```
-**Router Wired** (Core Router)
-```bash
+#### config Wired
+```
+#!/bin/bash
+
 auto eth0
 iface eth0 inet static
     address 10.87.16.58
-    netmask 255.255.255.252  # Link ke Cyberia
+    netmask 255.255.255.252
 auto eth1
 iface eth1 inet static
     address 10.87.16.49
-    netmask 255.255.255.248  # Link ke cabang kiri (switch /29)
+    netmask 255.255.255.248
 auto eth2
 iface eth2 inet static
     address 10.87.16.61
-    netmask 255.255.255.252  # Link ke Tachibana
+    netmask 255.255.255.252
 auto eth3
 iface eth3 inet static
     address 10.87.16.65
-    netmask 255.255.255.252  # Link ke Navi
+    netmask 255.255.255.252
 ```
-**Router Navi**
-```bash
-auto eth0
-iface eth0 inet static
-    address 10.87.16.66
-    netmask 255.255.255.252  # Link ke Wired
-auto eth1
-iface eth1 inet static
-    address 10.87.12.1
-    netmask 255.255.255.0    # Subnet Alice dkk
-auto eth2
-iface eth2 inet static
-    address 10.87.15.65
-    netmask 255.255.255.192  # Subnet Semi dkk
-auto eth3
-iface eth3 inet static
-    address 10.87.13.1
-    netmask 255.255.255.0    # Subnet Miho dkk
+#### config Psyche
 ```
-**Router Tachibana**
-```bash
-auto eth0
-iface eth0 inet static
-    address 10.87.16.62
-    netmask 255.255.255.252  # Link ke Wired
-auto eth1
-iface eth1 inet static
-    address 10.87.10.1
-    netmask 255.255.254.0    # Subnet JJ dkk
-auto eth2
-iface eth2 inet static
-    address 10.87.16.73
-    netmask 255.255.255.252  # Link ke Deus
-```
-**Router Psyche**
-```bash
+#!/bin/bash
+
 auto eth0
 iface eth0 inet static
     address 10.87.16.50
-    netmask 255.255.255.248  # Link ke switch /29
+    netmask 255.255.255.248
 auto eth1
 iface eth1 inet static
     address 10.87.0.1
-    netmask 255.255.252.0    # Subnet Karl dkk
+    netmask 255.255.252.0
 ```
-**Router Copland**
-```bash
+#### config Copland
+```
+#!/bin/bash
+
 auto eth0
 iface eth0 inet static
     address 10.87.15.129
-    netmask 255.255.255.192  # Subnet Specter dkk
+    netmask 255.255.255.192
 auto eth1
 iface eth1 inet static
     address 10.87.16.51
-    netmask 255.255.255.248  # Link ke switch /29
+    netmask 255.255.255.248
 auto eth2
 iface eth2 inet static
     address 10.87.8.1
-    netmask 255.255.254.0    # Subnet Reika dkk
+    netmask 255.255.254.0
 ```
-#### Konfigurasi Routing (ip route)
-Konfigurasi routing lengkap dijalankan melalui script bash berikut:
-**Router Cyberia** (Core + NAT)
-```bash
-# Aktifkan IP Forwarding
-sysctl -w net.ipv4.ip_forward=1
-# Konfigurasi NAT (Masquerade) ke arah Internet (NAT1) di eth0
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-# Routing melempar seluruh trafik lokal ke router Wired
-ip route add 10.87.0.0/16 via 10.87.16.58
+
+#### config Phantoma
 ```
-**Router Wired** (Core Routing)
-```bash
-sysctl -w net.ipv4.ip_forward=1
-# Rute default ke atas (menuju Cyberia)
-ip route add 0.0.0.0/0 via 10.87.16.57
-# Rute ke Cabang Kiri
-ip route add 10.87.0.0/22  via 10.87.16.50   # Psyche → Karl dkk
-ip route add 10.87.8.0/23  via 10.87.16.51   # Copland → Reika dkk
-ip route add 10.87.15.128/26 via 10.87.16.51 # Copland → Specter dkk
-ip route add 10.87.4.0/22  via 10.87.16.52   # Schumann/Accela
-ip route add 10.87.16.32/29 via 10.87.16.52  # Switch cabang kiri
-# Rute ke Cabang Kanan (Navi)
-ip route add 10.87.12.0/24  via 10.87.16.66  # Navi → Alice dkk
-ip route add 10.87.13.0/24  via 10.87.16.66  # Navi → Miho dkk
-ip route add 10.87.15.64/26 via 10.87.16.66  # Navi → Semi dkk
-# Rute ke Cabang Bawah (Tachibana dan seterusnya)
-ip route add 10.87.10.0/23   via 10.87.16.62  # Tachibana → JJ dkk
-ip route add 10.87.14.128/25 via 10.87.16.62  # Deus → Chisa dkk
-ip route add 10.87.15.192/26 via 10.87.16.62  # Protocol7
-ip route add 10.87.16.40/29  via 10.87.16.62  # Knights switch
-ip route add 10.87.16.0/27   via 10.87.16.62  # Phantoma → Mika dkk
-ip route add 10.87.15.0/26   via 10.87.16.62  # Shibuya → Lin dkk
+#!/bin/bash
+
+auto eth0
+iface eth0 inet dhcp
+auto eth1
+iface eth1 inet static
+    address 10.87.14.1
+    netmask 255.255.255.128
+auto eth2
+iface eth2 inet static
+    address 10.87.16.57
+    netmask 255.255.255.252
 ```
-**Router Cabang Kiri (Psyche, Copland, Schumann, Accela)**
-```bash
-# --- PSYCHE ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.49       # Default ke Wired
-# --- COPLAND ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.49       # Default ke Wired
-# --- SCHUMANN ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.49       # Default ke Wired
-ip route add 10.87.4.0/22 via 10.87.16.70    # Rute ke Accela
-# --- ACCELA ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.69       # Default ke Schumann
+#### config Navi
 ```
-**Router Cabang Kanan (Navi)**
-```bash
-# --- NAVI ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.65       # Default ke Wired
-```
-**Router Cabang Bawah (Tachibana → Shibuya)**
-```bash
-# --- TACHIBANA ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.61
-ip route add 10.87.14.128/25 via 10.87.16.74  # → Deus
-ip route add 10.87.15.192/26 via 10.87.16.74
-ip route add 10.87.16.40/29  via 10.87.16.74
-ip route add 10.87.16.0/27   via 10.87.16.74
-ip route add 10.87.15.0/26   via 10.87.16.74
-# --- DEUS ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.73
-ip route add 10.87.15.192/26 via 10.87.16.78  # → Protocol7
-ip route add 10.87.16.40/29  via 10.87.16.78
-ip route add 10.87.16.0/27   via 10.87.16.78
-ip route add 10.87.15.0/26   via 10.87.16.78
-# --- PROTOCOL7 ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.77
-ip route add 10.87.16.40/29 via 10.87.16.82   # → Knights
-ip route add 10.87.16.0/27  via 10.87.16.82
-ip route add 10.87.15.0/26  via 10.87.16.82
-# --- KNIGHTS ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.81
-ip route add 10.87.16.0/27 via 10.87.16.86    # → Phantoma
-ip route add 10.87.15.0/26 via 10.87.16.86
-# --- PHANTOMA ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.85
-ip route add 10.87.15.0/26 via 10.87.16.90    # → Shibuya
-# --- SHIBUYA ---
-sysctl -w net.ipv4.ip_forward=1
-ip route add 0.0.0.0/0 via 10.87.16.89
-```
-#### Konfigurasi PC/Host Klien
-Setiap PC klien dikonfigurasi dengan format:
-```bash
+#!/bin/bash
+
 auto eth0
 iface eth0 inet static
-    address <IP_Host>
-    netmask <Subnet_Mask>
-    gateway <IP_Router_terdekat>
+    address 10.87.16.66
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.12.1
+    netmask 255.255.255.0
+auto eth2
+iface eth2 inet static
+    address 10.87.15.65
+    netmask 255.255.255.192
+auto eth3
+iface eth3 inet static
+    address 10.87.13.1
+    netmask 255.255.255.0
 ```
-Contoh:
-```bash
-# PC Karl (subnet 10.87.0.0/22, gateway Psyche)
+#### config Knight
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.82
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.16.85
+    netmask 255.255.255.252
+auto eth2
+iface eth2 inet static
+    address 10.87.16.41
+    netmask 255.255.255.248
+```
+#### config Protocol7
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.78
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.16.81
+    netmask 255.255.255.252
+auto eth2
+iface eth2 inet static
+    address 10.87.15.193
+    netmask 255.255.255.192
+```
+
+#### config Shibuya
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.90
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.15.1
+    netmask 255.255.255.192
+```
+#### config Tachibana
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.62
+    netmask 255.255.255.252
+auto eth1
+iface eth1 inet static
+    address 10.87.10.1
+    netmask 255.255.254.0
+auto eth2
+iface eth2 inet static
+    address 10.87.16.73
+    netmask 255.255.255.252
+```
+
+#### Konfigurasi PC/Host Klien
+#### config Akashic
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.34
+    netmask 255.255.255.248
+    gateway 10.87.16.33
+```
+#### config Alice
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.12.2
+    netmask 255.255.255.0
+    gateway 10.87.12.1
+```
+#### config Chisa
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.194
+    netmask 255.255.255.192
+    gateway 10.87.15.193
+```
+#### config Collective
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.10.2
+    netmask 255.255.254.0
+    gateway 10.87.10.1
+```
+#### config Denpa
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.4.3
+    netmask 255.255.252.0
+    gateway 10.87.4.1
+```
+#### config Eiri
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.42
+    netmask 255.255.255.248
+    gateway 10.87.16.41
+```
+#### config Ghost
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.10.3
+    netmask 255.255.254.0
+    gateway 10.87.10.1
+```
+#### config Hodgeson
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.195
+    netmask 255.255.255.192
+    gateway 10.87.15.193
+```
+#### config JJ
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.14.2
+    netmask 255.255.255.128
+    gateway 10.87.14.1
+```
+#### config Juri
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.130
+    netmask 255.255.255.192
+    gateway 10.87.15.129
+```
+#### config karl
+```
+#!/bin/bash
+
 auto eth0
 iface eth0 inet static
     address 10.87.0.2
     netmask 255.255.252.0
     gateway 10.87.0.1
+```
+#### config Kuma
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.13.4
+    netmask 255.255.255.0
+    gateway 10.87.13.1
+```
+#### config Lain
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.2
+    netmask 255.255.255.192
+    gateway 10.87.15.1
+```
+#### config lilith
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.14.130
+    netmask 255.255.255.128
+    gateway 10.87.14.129
+```
+#### config Lin
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.0.3
+    netmask 255.255.252.0
+    gateway 10.87.0.1
+```
+#### config masayuki
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.8.2
+    netmask 255.255.254.0
+    gateway 10.87.8.1
+```
+#### config Miho
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.13.3
+    netmask 255.255.255.0
+    gateway 10.87.13.1
+```
+#### config Mika
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.3
+    netmask 255.255.255.192
+    gateway 10.87.15.1
+```
+#### config MyuMyu
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.14.3
+    netmask 255.255.255.128
+    gateway 10.87.14.1
+```
+#### config Omnipresence
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.4.2
+    netmask 255.255.252.0
+    gateway 10.87.4.1
+```
+#### config Reika
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.12.3
+    netmask 255.255.255.0
+    gateway 10.87.12.1
+```
+#### config Semi
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.16.2
+    netmask 255.255.255.224
+    gateway 10.87.16.1
+```
+#### config Specter
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.14.131
+    netmask 255.255.255.128
+    gateway 10.87.14.129
+```
+#### config Taro
+```
+#!/bin/bash
+
+auto eth0
+iface eth0 inet static
+    address 10.87.15.66
+    netmask 255.255.255.192
+    gateway 10.87.15.65
+```
+#### config Yasuo
+```
+#!/bin/bash
+auto eth0
+iface eth0 inet static
+    address 10.87.13.2
+    netmask 255.255.255.0
+    gateway 10.87.13.1
 ```
 ---
 ## Hasil Tes Ping
@@ -769,3 +814,4 @@ Setelah semua konfigurasi IP address dan routing selesai, dilakukan pengujian ko
 ![Hasil Ping 5](aset/cpt/hasilping5.png)
 
 Semua node berhasil saling terhubung yang ditandai dengan respons `ping` yang sukses (0% packet loss).
+
